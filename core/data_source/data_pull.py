@@ -51,17 +51,17 @@ class RealTimeDataSession:
 
 
 
-class HistoricDataSession:
-
-    def __init__(self, portfolio):
-        self.portfolio = portfolio
-
-http://www.google.com/finance/historical?cid=945810642553026&startdate=Feb%209%2C%202016&enddate=Jul%2029%2C%202017&num=30&ei=lg58WZjaCdOGesaEsrAI&start=60&output=csv
-
-    def inquiry(self):
-import requests
-url = '
-response = requests.get(url)
-print response
+# class HistoricDataSession:
+#
+#     def __init__(self, portfolio):
+#         self.portfolio = portfolio
+#
+# # http://www.google.com/finance/historical?cid=945810642553026&startdate=Feb%209%2C%202016&enddate=Jul%2029%2C%202017&num=30&ei=lg58WZjaCdOGesaEsrAI&start=60&output=csv
+#
+#     def inquiry(self):
+# import requests
+# url = '
+# response = requests.get(url)
+# print response
 
     # def grab_data(self):
