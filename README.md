@@ -4,8 +4,8 @@ A Growing Model for Technical Analysis
 
 ## Contributors
 The model was developed by:
-* Saahith Pochiraju
-* Duncan Cock Foster
+* Saahith Chandra Pochiraju
+* Duncan Carl Cock Foster
 
 ## License
 
