@@ -1,4 +1,4 @@
-# finanalysis
+# Carl-Chandra Analysis
 A Growing Model for Technical Analysis
 
 
