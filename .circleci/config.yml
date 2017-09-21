@@ -44,6 +44,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
+            mkdir /home/circleci/repo/saved_data
             python -m pytest -s tests
 
       - store_artifacts:
