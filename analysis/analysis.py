@@ -2,8 +2,6 @@ from core.data_pull import HistoricDataSession
 import pandas as pd
 import os
 
-# portfolio = ['GSPC', 'APRI', 'TVIX', 'TECL', 'SNAP', 'SOXL', 'SPXL', 'APRN']
-
 class Analysis(HistoricDataSession):
     """
     Represents an object of covariance analysis. Given a portfolio, you can pull various metrics.
