@@ -1,4 +1,4 @@
-from analysis.analyisis import Analysis
+from analysis.analysis import Analysis
 import unittest
 
 class TestAnalysis(unittest.TestCase):
