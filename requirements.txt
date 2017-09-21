@@ -1,5 +1,4 @@
 requests
 six
-re
 pandas
 unittest
