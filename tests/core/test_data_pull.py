@@ -11,12 +11,14 @@ class TestRealTime(unittest.TestCase):
         self.assertIsInstance(price[7], float)
 
     def test_run_real_time(self):
-        z = RealTimeDataSession(portfolio = 'ZYNE', sampling = 1, islive = True, max_time = 3, fname = 'real_time_test.csv' )
+        z = RealTimeDataSession(portfolio = 'ZYNE', sampling = 1, islive = True, max_time = 2, fname = 'real_time_test.csv' )
         n = z.run_real_time()
         self.assertEqual(n, 'Done.')
 
 class TestHistoric(unittest.TestCase):
+
     def test_inquiry(self):
-        h = HistoricDataSession(portfolio='VXX', fname = 'historical_test.csv')
+        h = HistoricDataSession(portfolio=['VXX'])
         data = h.inquiry()
-        self.assertIsInstance(data[5][2], float)
+        for item in data:
+            self.assertEqual(len(item.columns),6)

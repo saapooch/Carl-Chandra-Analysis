@@ -1,5 +1,7 @@
 import time, os, re, csv
 import requests
+import pandas
+from six.moves.urllib.error import HTTPError
 
 
 class RealTimeDataSession:
@@ -68,7 +70,7 @@ class RealTimeDataSession:
         return 'Done.'
 
 
-class HistoricDataSession:
+class HistoricDataSession(object):
     """ Represents a session collecting historical data
 
     Attributes:
@@ -76,40 +78,24 @@ class HistoricDataSession:
         fname (:obj:`str`): file name for saved data
     """
 
-    def __init__(self, portfolio = None, fname = None):
+    def __init__(self, portfolio = None):
         self.portfolio = portfolio
-        self.fname = fname
-
 
     def inquiry(self):
-        url = 'http://www.google.com/finance/historical?q='
-        url2 = '&ei=njuHWfjsIsuBmAGvl4qQAw&start=30&num=30&output=csv'
-        response = requests.get(url+self.portfolio+url2)
-        decoded = response.content
-        cr = csv.reader(decoded.splitlines(), delimiter=',')
-        mylist = list(cr)
-        data = []
-        for item in mylist[1:len(mylist)]:
-            if item[1] == '-':
-                item[1] = '-'
-            else:
-                item[1] = float(item[1])
-            if item[2] == '-':
-                item[2] = '-'
-            else:
-                item[2] = float(item[2])
-            if item[3] == '-':
-                item[3] = '-'
-            else:
-                item[3] = float(item[3])
-            item[4] = float(item[4])
-            item[5] = int(item[5])
-            data.append(item)
-        return data
-
-    def save_data(self):
-        data = self.inquiry()
-        with open(self.fname,'a') as f:
-            writer=csv.writer(f,dialect="excel", delimiter = ',')
-            for item in data:
-                writer.writerow(item)
+        all_data = []
+        cwd = os.getcwd()
+        for tickers in self.portfolio:
+            url = 'http://www.google.com/finance/historical?q='
+            url2 = '&ei=njuHWfjsIsuBmAGvl4qQAw&start=30&num=30&output=csv'
+            try:
+                data = pandas.read_csv(url+tickers+url2)
+            except HTTPError:
+                print(tickers + ' was not able to load')
+                continue
+            all_data.append(data)
+        # Saves to file /cwd/saved_data/(Ticker).csv
+        index = 0
+        for items in all_data:
+            items.to_csv(cwd+'/saved_data/' + self.portfolio[index] +'.csv')
+            index += 1
+        return all_data
