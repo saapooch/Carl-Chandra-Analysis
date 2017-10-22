@@ -1,0 +1,4 @@
+requests
+six
+pandas
+pytest
