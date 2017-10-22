@@ -43,7 +43,7 @@ for stock in listOfStocks:
 	data = data.fillna(method = 'pad')
 
 	#Get the closing stock price
-	closeData = data.ix[:, 'Close']
+	closeData = data.ix[:, 'Adj_Close']
 
 	#Get daily % changes of stock prices - relative returns
 	percentReturns = closeData.pct_change(1)
