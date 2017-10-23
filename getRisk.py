@@ -13,7 +13,8 @@ startDate = '2010-01-01'
 endDate = '2016-12-31'
 
 
-stocks = ['AAPL', 'MSFT', 'UTX', 'TRV']
+stocks = ['AAPL', 'MSFT', 'UTX', 'TRV', 'VZ', 'WMT', 'KO']
+numStocks = len(stocks)
 #Quandl stock databases I am accessing follow the format: EOD (for end of day) + /(stock ticker)
 
 #Start on our portfolio data frame - get all weekdays in the date range as index
@@ -55,11 +56,11 @@ num_portfolios = 25000
  
 #set up array to hold results
 #We have increased the size of the array to hold the weight values for each stock
-results = np.zeros((4+len(stocks)-1,num_portfolios))
+results = np.zeros((numStocks+3,num_portfolios))
  
 for i in range(num_portfolios):
     #select random weights for portfolio holdings
-    weights = np.array(np.random.random(4))
+    weights = np.array(np.random.random(numStocks))
     #rebalance weights to sum to 1
     weights /= np.sum(weights)
  
@@ -77,8 +78,14 @@ for i in range(num_portfolios):
     	results[j+3,i] = weights[j]
  
 #convert results array to Pandas DataFrame
-results_frame = pd.DataFrame(results.T,columns=['ret','stdev','sharpe',stocks[0],stocks[1],stocks[2],stocks[3]])
- 
+#results_frame = pd.DataFrame(results.T,columns=['ret','stdev','sharpe',stocks[0],stocks[1],stocks[2],stocks[3],stocks[4]])
+results_frame = pd.DataFrame(results.T)
+nameArray = ['ret','stdev','sharpe']
+for stock in stocks:
+	nameArray.append(stock)
+
+results_frame.columns = nameArray
+
 #locate position of portfolio with highest Sharpe Ratio
 max_sharpe_port = results_frame.iloc[results_frame['sharpe'].idxmax()]
 #locate positon of portfolio with minimum standard deviation
@@ -94,7 +101,9 @@ plt.scatter(max_sharpe_port[1],max_sharpe_port[0],marker=(5,1,0),color='r',s=100
 #plot green star to highlight position of minimum variance portfolio
 plt.scatter(min_vol_port[1],min_vol_port[0],marker=(5,1,0),color='g',s=1000)
 
+print("Max sharpe is:")
 print(max_sharpe_port)
+print("Min volatility is:")
 print(min_vol_port)
 
 plt.show()
