@@ -1,4 +1,4 @@
-from core.data_pull import HistoricDataSession
+from pull_data import HistoricDataSession
 import pandas as pd
 import os
 
@@ -107,7 +107,6 @@ class Analysis(HistoricDataSession):
 
         """
         change_data = self.calculate_interday_difference()
-
         return change_data.mean(), change_data.std()
 
 
@@ -128,3 +127,8 @@ class Analysis(HistoricDataSession):
             index += 1
 
         return closing.iloc[0:200].mean(), closing.iloc[0:50].mean()
+
+    def moving_percent_change(self):
+        change_data = self.calculate_interday_difference()
+
+        return change_data.pct_change(10), change_data.pct_change(25)

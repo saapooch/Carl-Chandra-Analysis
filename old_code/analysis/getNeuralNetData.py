@@ -1,10 +1,10 @@
 import quandl
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 #Quandl API key associated with my account
-quandl.ApiConfig.api_key = '2sBoxWDxwXqHmxGQoPys'
+quandl.ApiConfig.api_key = 'PASBrxyzKbVfmxh2Cyzk'
 
 startDate = '2010-01-01'
 endDate = '2016-12-31'
@@ -21,7 +21,9 @@ trainingData = pd.DataFrame(index = trainingIndex, columns = ['Close','Volume','
 #Get data from Quandl database
 data = quandl.get(databaseName, start_date=startDate, end_date=endDate)
 
-#Quandl doesnt have a lot of holes, but this will fill in any NAN entries 
+print(data.columns)
+
+#Quandl doesnt have a lot of holes, but this will fill in any NAN entries
 data = data.fillna(method = 'pad')
 
 trainingData['Close'] = data.ix[:, 'Adj_Close']
@@ -52,4 +54,4 @@ twoWeekShift = twoWeekShift.shift(-14)
 #this can be done using the np.where function
 trainingData['Output Layer - Y'] = np.where(twoWeekShift>=.03, 1, 0)
 
-print (trainingData.head(150))
+# print (trainingData.head(150))

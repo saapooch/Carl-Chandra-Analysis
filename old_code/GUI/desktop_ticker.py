@@ -1,4 +1,4 @@
-from data_pull import RealTimeDataSession, HistoricDataSession
+from core.data_pull import RealTimeDataSession, HistoricDataSession
 import tkinter as tk
 import random
 

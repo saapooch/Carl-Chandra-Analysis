@@ -1,5 +1,5 @@
 import unittest
-from core.data_pull import RealTimeDataSession, HistoricDataSession
+from data.pull_data import RealTimeDataSession, HistoricDataSession, QuandlDataSession
 
 class TestRealTime(unittest.TestCase):
     def test_inquiry(self):
@@ -22,3 +22,11 @@ class TestHistoric(unittest.TestCase):
         data = h.inquiry()
         for item in data:
             self.assertEqual(len(item.columns),6)
+
+class TestQuandlData(unittest.TestCase):
+
+    def test_pull_data(self):
+        d  = QuandlDataSession(portfolio = ['AAPL', 'GOOGL'])
+        data = d.pull_data()
+
+        print(data['AAPL'].head())

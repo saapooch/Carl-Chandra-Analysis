@@ -2,3 +2,4 @@ requests
 six
 pandas
 pytest
+numpy

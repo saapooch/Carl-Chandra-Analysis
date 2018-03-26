@@ -1,8 +1,8 @@
 import time, os, re, csv
 import requests
-import pandas
+import pandas as pd
+import quandl
 from six.moves.urllib.error import HTTPError
-
 
 class RealTimeDataSession:
     """ Represents a session collecting real time data
@@ -69,7 +69,6 @@ class RealTimeDataSession:
         f.close()
         return 'Done.'
 
-
 class HistoricDataSession(object):
     """ Represents a session collecting historical data
 
@@ -85,10 +84,10 @@ class HistoricDataSession(object):
         all_data = []
         cwd = os.getcwd()
         for tickers in self.portfolio:
-            url = 'http://www.google.com/finance/historical?q='
-            url2 = '&ei=njuHWfjsIsuBmAGvl4qQAw&start=30&num=30&output=csv'
+            url = 'https://query1.finance.yahoo.com/v7/finance/download/'
+            url2 = '?period1=1510108581&period2=1512700581&interval=1d&events=history&crumb=/JRqfKM46Lr'
             try:
-                data = pandas.read_csv(url+tickers+url2)
+                data = pd.read_csv(url+tickers+url2)
             except HTTPError:
                 print(tickers + ' was not able to load')
                 continue
@@ -99,3 +98,31 @@ class HistoricDataSession(object):
             items.to_csv(cwd+'/saved_data/' + self.portfolio[index] +'.csv')
             index += 1
         return all_data
+
+class QuandlDataSession(object):
+    """ Represents a session collecting historical data
+
+    Attributes:
+        portfolio (:obj:`list` of :obj:`str`): a list of the ticker names
+    """
+
+    def __init__(self, portfolio = None, startDate = '2010-01-01', endDate = '2016-12-31'):
+        self.portfolio = portfolio
+        self.startDate = startDate
+        self.endDate = endDate
+
+    def pull_data(self):
+        """
+        Output:
+            portfolio (:obj:`dict` of :obj:`pd.Dataframe`): a dictionary of dataframes for data
+
+        """
+        #Quandl API key associated with my account
+        quandl.ApiConfig.api_key = 'PASBrxyzKbVfmxh2Cyzk'
+
+        data = {}
+        for ticker in self.portfolio:
+            databaseName = "EOD/" + ticker
+            data[ticker] = quandl.get(databaseName, start_date=self.startDate, end_date=self.endDate)
+
+        return data
