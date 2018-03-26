@@ -1,5 +1,6 @@
 <!-- [![PyPI package](https://img.shields.io/pypi/v/Carl-Chandra-Analysis.svg)](https://pypi.python.org/pypi/Carl-Chandra-Analysis) -->
 [![Test results](https://circleci.com/gh/saapooch/Carl-Chandra-Analysis.svg?style=shield)](https://circleci.com/gh/saapooch/Carl-Chandra-Analysis)
+[![CodeFactor](https://www.codefactor.io/repository/github/saapooch/carl-chandra-analysis/badge)](https://www.codefactor.io/repository/github/saapooch/carl-chandra-analysis)
 ![Github All Releases](https://img.shields.io/github/downloads/saapooch/Carl-Chandra-Analysis/total.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/saapooch/Carl-Chandra-Analysis.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/saapooch/Carl-Chandra-Analysis.svg)
