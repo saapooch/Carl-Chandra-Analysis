@@ -1,7 +1,7 @@
 import unittest
 from core.backtest import BacktestSession
 from core.assets import Portfolio
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 class TestBacktest(unittest.TestCase):
 
