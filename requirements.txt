@@ -3,3 +3,4 @@ six
 pandas
 pytest
 numpy
+alpha_vantage
