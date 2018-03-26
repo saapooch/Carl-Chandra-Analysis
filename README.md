@@ -8,8 +8,15 @@
 
 
 
-# Carl-Chandra Analysis
-A growing framework and set of strategies for interday quantitative trading
+# `Carl-Chandra-Analysis`: a framework for interday quantitative trading
+This is a collaborative project to create consistent trading strategies with the goal of beating market baselines
+
+## Current Strategies 
+Under Development 
+
+## Data Sources
+- Alpha Vantage
+- Google Finance (DEPRECATED)
 
 ## Contributors
 The model was developed by:
