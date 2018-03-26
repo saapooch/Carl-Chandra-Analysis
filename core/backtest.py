@@ -42,7 +42,7 @@ class BacktestSession(Data):
             entry = []
             stock_value = 0
 
-            self.run_strategy()
+            self.run_strategy(item)
 
             for key, value in self.data.items():
                 val = self.portfolio.stocks[key]*self.data[key].loc[item]['4. close']
@@ -51,7 +51,7 @@ class BacktestSession(Data):
             entry.append(stock_value)
             self.log_entry(entry, item)
 
-    def run_strategy(self):
+    def run_strategy(self, date):
         """
         Runs strategy changing the portfolio stocks
         """

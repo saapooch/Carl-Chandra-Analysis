@@ -16,5 +16,5 @@ class TestBacktest(unittest.TestCase):
     def test_collect_data(self):
         self.backtest_session.collect_data()
         self.backtest_session.run_backtest()
-        self.backtest_session.log['total'].plot()
-        plt.show()
+        # self.backtest_session.log['total'].plot()
+        # plt.show()
