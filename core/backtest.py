@@ -11,12 +11,16 @@ class BacktestSession(Data):
         strategy(:obj:`Strategy`): strategy implemented in backtest
     """
 
-    def __init__(self, portfolio=None, strategy=None, start='2018-02-26', end='2018-03-26'):
+    def __init__(self, portfolio=None, strategy=None, start='2017-02-26', end='2018-03-26'):
         self.portfolio = portfolio
         self.strategy = strategy
         self.start = start
         self.end = end
-        self.log = {}
+
+        tickers = [ticker for ticker in self.portfolio.stocks.keys()]
+        tickers.append('total')
+
+        self.log = pd.DataFrame(columns=tickers)
 
         super(BacktestSession, self).__init__()
 
@@ -54,4 +58,4 @@ class BacktestSession(Data):
         pass
 
     def log_entry(self, entry, date):
-        self.log[date] = entry
+        self.log.loc[date] = entry
