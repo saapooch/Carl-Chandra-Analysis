@@ -1,5 +1,6 @@
 from core.data import Data
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class BacktestSession(Data):
     """
@@ -59,3 +60,9 @@ class BacktestSession(Data):
 
     def log_entry(self, entry, date):
         self.log.loc[date] = entry
+
+
+    def plot_portfolio(self):
+        print(self.log)
+        self.log['total'].plot()
+        plt.show()
