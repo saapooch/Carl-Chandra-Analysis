@@ -9,8 +9,7 @@
 
 
 # Carl-Chandra Analysis
-A Growing Model for Technical Analysis
-
+A growing framework and set of strategies for interday quantitative trading
 
 ## Contributors
 The model was developed by:
