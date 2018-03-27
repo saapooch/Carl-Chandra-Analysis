@@ -12,7 +12,7 @@ class BacktestSession(Data):
         strategy(:obj:`Strategy`): strategy implemented in backtest
     """
 
-    def __init__(self, portfolio=None, strategy=None, start='2017-02-26', end='2018-03-26'):
+    def __init__(self, portfolio=None, strategy=None, start='2018-02-26', end='2018-03-26'):
         self.portfolio = portfolio
         self.strategy = strategy
         self.start = start
@@ -41,15 +41,16 @@ class BacktestSession(Data):
 
         for item in self.date_list:
             entry = []
-            stock_value = 0
+            changed_value = 0
 
             self.run_strategy(item)
 
             for key, value in self.data.items():
+                init_val = self.portfolio.stocks[key]*self.data[key].iloc[0]['4. close']
                 val = self.portfolio.stocks[key]*self.data[key].loc[item]['4. close']
                 entry.append([key, self.portfolio.stocks[key], val])
-                stock_value += val
-            entry.append(stock_value)
+                changed_value += (val-init_val)*100/(init_val)
+            entry.append(changed_value)
             self.log_entry(entry, item)
 
     def run_strategy(self, date):
