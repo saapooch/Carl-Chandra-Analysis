@@ -38,32 +38,42 @@ class BacktestSession(Data):
                 self.date_list = self.data[ticker].index.tolist()
 
     def run_backtest(self):
+        """
+            Runs the backtest by iterating through the date list
+        """
 
-        for item in self.date_list:
+
+        for date in self.date_list:
             entry = []
             changed_value = 0
-
-            self.run_strategy(item)
-
             for key, value in self.data.items():
-                init_val = self.portfolio.stocks[key]*self.data[key].iloc[0]['4. close']
-                val = self.portfolio.stocks[key]*self.data[key].loc[item]['4. close']
+                # init_val = self.portfolio.stocks[key]*self.data[key].iloc[0]['4. close']
+                val = self.portfolio.stocks[key]*self.data[key].loc[date]['4. close']
                 entry.append([key, self.portfolio.stocks[key], val])
-                changed_value += (val-init_val)*100/(init_val)
+                # changed_value += (val-init_val)*100/(init_val)
+                changed_value += val
             entry.append(changed_value)
-            self.log_entry(entry, item)
+            self.log_entry(entry, date)
+
+                    
+            if self.strategy:
+                self.run_strategy(date)
+
+
 
     def run_strategy(self, date):
         """
-        Runs strategy changing the portfolio stocks
+        Runs strategy changing the portfolio stock amounts
         """
-        pass
+        decisions = self.strategy.create_decisions(date)
+        self.portfolio.execute_decisions(decisions)
+
 
     def log_entry(self, entry, date):
         self.log.loc[date] = entry
 
 
     def plot_portfolio(self):
-        print(self.log)
+
         self.log['total'].plot()
         plt.show()
