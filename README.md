@@ -21,7 +21,7 @@ Under Development
 
 ## Contributors
 The model was developed by:
-* Saahith C. Pochiraju
+* [Saahith C. Pochiraju](www.saahith.com)
 * Duncan C. Cock Foster
 
 ## License
